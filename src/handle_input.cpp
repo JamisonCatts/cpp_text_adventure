@@ -2,9 +2,13 @@
 #include <sstream>
 #include <vector>
 #include <string>
-#include <handle_input.h>
 #include <unordered_set>
 #include <unordered_map>
+#include <algorithm>
+#include <optional>
+
+#include <handle_input.h>
+
 
 namespace
 {
@@ -18,22 +22,8 @@ namespace
             {"use", {"use", "utilize", "activate"}}, 
         };
 
+    
 
-    std::unordered_set<std::string> valid_starters = []
-    {
-        std::unordered_set<std::string> result;
-
-        for (const auto& [super_word, sub_words] : super_words)
-        {
-            
-            for (const auto& sub_word : sub_words)
-            {
-                result.insert(sub_word);
-            }
-        }
-
-        return result;
-    }();
 }
 
 std::vector<std::string> split(const std::string &str, char delimiter)
@@ -50,10 +40,26 @@ std::vector<std::string> split(const std::string &str, char delimiter)
     return result;
 }
 
+std::optional<std::string> find_super(const std::string &sub) {
+
+    for (const auto& [key, value_set] : super_words) {
+        if (value_set.find(sub) != value_set.end()) {
+            return key;
+        }
+    }
+
+    return std::nullopt;
+}
+
 /*
  */
 int handle_input(std::string &input)
 {
+    // to_lowercase()
+    std::transform(input.begin(), input.end(), input.begin(),
+               [](unsigned char c) {
+                   return std::tolower(c);
+               });
 
     std::vector<std::string> splits = split(input, ' ');
 
@@ -63,15 +69,21 @@ int handle_input(std::string &input)
         return 0;
     }
 
-    if (splits[0] == "exit")
-    {
-        return 1;
+    
+
+    
+    std::string first_word = splits[0];
+    auto super_word = find_super(first_word);
+
+    // check if word actually in valid words
+    if (super_word != std::nullopt){
+
+    }
+    else {
+        std::cout << "Invalid action word" << std::endl;
     }
 
-    for (auto &token : splits)
-    {
-        std::cout << token << std::endl;
-    }
+    
 
     return 0;
 }
