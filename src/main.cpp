@@ -1,4 +1,6 @@
 #include <iostream>
+
+#include <classes/State.h>
 #include <handle_input.h>
 // Change name eventually
 
@@ -10,18 +12,18 @@ void print_initial(){
 }
 
 
-
+State current_state;
 
 int main() {
 
     print_initial();
     std::string userInput;
     
-    auto terminate = true;
+    auto not_terminate = true;
     // Main gameplay loop. Gets user input and processes
-    while(terminate){
+    while(not_terminate){
         std::getline(std::cin, userInput);
-        terminate = !handle_input(userInput);
+        not_terminate = !handle_input(userInput);
     }
 
     return 0;

@@ -1,7 +1,7 @@
 #include <string>
 #include <unordered_set>
 
-#include <Item.h>
+#include <classes/Item.h>
 class Location {
 
     std::string name;
@@ -12,4 +12,4 @@ class Location {
     // public:
 
 
-}
+};

@@ -8,18 +8,26 @@
 #include <optional>
 
 #include <handle_input.h>
+#include <classes/State.h>
 
 
 namespace
 {
+    enum SuperWord {
+        EXIT,
+        ATTACK,
+        LOOK,
+        USE
+    };
     // Checks first word of input to see if its in total set of valid words
     // if so, maps any synonym to a parent identifier
     // valid starters is defined as all values in super_words map on initialization
-    std::unordered_map<std::string, std::unordered_set<std::string>> super_words =
+    std::unordered_map<SuperWord, std::unordered_set<std::string>> super_words =
         {
-            {"exit" , {"exit", "quit", "terminate"}},
-            {"attack", {"attack", "fight", "battle", "combat"}},
-            {"use", {"use", "utilize", "activate"}}, 
+            {EXIT , {"exit", "quit", "terminate"}},
+            {ATTACK, {"attack", "fight", "battle", "combat"}},
+            {USE, {"use", "utilize", "activate"}}, 
+            {LOOK, {"look", "search"}}
         };
 
     
@@ -40,7 +48,7 @@ std::vector<std::string> split(const std::string &str, char delimiter)
     return result;
 }
 
-std::optional<std::string> find_super(const std::string &sub) {
+std::optional<SuperWord> find_super(const std::string &sub) {
 
     for (const auto& [key, value_set] : super_words) {
         if (value_set.find(sub) != value_set.end()) {
@@ -73,16 +81,30 @@ int handle_input(std::string &input)
 
     
     std::string first_word = splits[0];
-    auto super_word = find_super(first_word);
+    SuperWord super_word;
+    auto res = find_super(first_word);
 
     // check if word actually in valid words
-    if (super_word != std::nullopt){
-
+    if (!res.has_value()){
+            std::cout << "Invalid action word" << std::endl;
+        return 0;
     }
     else {
-        std::cout << "Invalid action word" << std::endl;
+        super_word = res.value();
     }
 
+    switch (super_word)
+    {
+    case EXIT:
+            return true;
+        break;
+    case LOOK:
+        
+        break;
+    
+    default:
+        break;
+    }
     
 
     return 0;
