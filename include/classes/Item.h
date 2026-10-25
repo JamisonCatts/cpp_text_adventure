@@ -1,14 +1,16 @@
+#include <string>
+
 #pragma once
 
 class Item{
     
     public: 
     
-    std::string get_name() const;
+        std::string get_name() const;
     
-    virtual void use();
+        virtual void use();
     private:
-    std::string name;
+        std::string name;
         
 
 };

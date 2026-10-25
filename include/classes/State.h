@@ -8,11 +8,13 @@ class State {
 
 
     public:
-        State();
-
+        State(const std::string &location_name);
+        
+        const Location &get_location() const;
+        
     private:
-        // Location location;
-
+        
+        Location location;
         
 
 };

@@ -9,6 +9,11 @@ add_executable(cpp_text_adv
     src/main.cpp
     src/handle_input.cpp
     src/classes/State.cpp
+    src/classes/Item.cpp
+    src/classes/Location.cpp
+    src/classes/Point.cpp
+    src/handle_actions.cpp
+    data/LocationData.cpp
 )
 
 target_include_directories(cpp_text_adv PRIVATE

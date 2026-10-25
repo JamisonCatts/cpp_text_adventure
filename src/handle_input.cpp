@@ -9,7 +9,10 @@
 
 #include <handle_input.h>
 #include <classes/State.h>
+#include <handle_actions.h>
 
+
+std::string terminate_word = "HADOINGO";
 
 namespace
 {
@@ -61,7 +64,7 @@ std::optional<SuperWord> find_super(const std::string &sub) {
 
 /*
  */
-int handle_input(std::string &input)
+std::string handle_input(std::string &input)
 {
     // to_lowercase()
     std::transform(input.begin(), input.end(), input.begin(),
@@ -74,7 +77,7 @@ int handle_input(std::string &input)
     // check if only whitespace
     if (splits.size() == 0)
     {
-        return 0;
+        return "";
     }
 
     
@@ -86,8 +89,8 @@ int handle_input(std::string &input)
 
     // check if word actually in valid words
     if (!res.has_value()){
-            std::cout << "Invalid action word" << std::endl;
-        return 0;
+        return "Invalid action word";
+        
     }
     else {
         super_word = res.value();
@@ -96,7 +99,7 @@ int handle_input(std::string &input)
     switch (super_word)
     {
     case EXIT:
-            return true;
+            return terminate_word;
         break;
     case LOOK:
         
@@ -107,5 +110,5 @@ int handle_input(std::string &input)
     }
     
 
-    return 0;
+    return "End of boingo";
 }

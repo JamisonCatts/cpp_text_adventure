@@ -4,26 +4,38 @@
 #include <handle_input.h>
 // Change name eventually
 
-void print_initial(){
-    std::cout << "Welcome to Text Adventure\n" << std::endl;
-    std::cout << "Type actions to interact with world\n" << std::endl;
-    std::cout << "...\n" << std::endl;
-    std::cout << "You awake in a dimly lit dungeon. There is a candle in the center of the room, and a rusty gate\n" << std::endl;
+std::string get_initial_message(){
+    std::string ret = "";
+
+    ret += "Welcome to Text Adventure\n";
+    ret += "Type actions to interact with world\n";
+    ret += "...\n";
+    ret += "You awake in a dimly lit dungeon. There is a candle in the center of the room, and a rusty gate\n";
+
+    return ret;
 }
 
 
-State current_state;
 
 int main() {
 
-    print_initial();
+    std::cout << get_initial_message();
     std::string userInput;
     
-    auto not_terminate = true;
+
     // Main gameplay loop. Gets user input and processes
-    while(not_terminate){
+    std::string res;
+    while(true){
         std::getline(std::cin, userInput);
-        not_terminate = !handle_input(userInput);
+
+        res = handle_input(userInput);
+
+        if (res == terminate_word){
+            break;
+        }
+        std::cout << res;
+        std::cout << std::endl;
+        
     }
 
     return 0;
