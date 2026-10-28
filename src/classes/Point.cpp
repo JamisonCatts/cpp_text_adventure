@@ -1,4 +1,8 @@
+#include <string>
+
 #include <classes/Point.h>
+
+Point::Point(std::string name, std::string description) : name(name), description(description){};
 
 bool Point::operator==(const Point &other) const
 {

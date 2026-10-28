@@ -31,9 +31,10 @@ private:
     std::vector<Point> points;
 
 public:
+    Location(std::string name, std::string description);
     std::string get_description() const;
     std::string get_point_desc(const std::string &word) const;
     bool has_point(const std::string &name) const;
     std::vector<std::string> get_ports();
-    Location(std::string name, std::string description);
+    void add_point(Point point);
 };

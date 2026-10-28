@@ -83,9 +83,10 @@ std::string handle_input(std::string &input)
     
 
     
-    std::string first_word = splits[0];
+    std::string first_word = splits.at(0);
     SuperWord super_word;
     auto res = find_super(first_word);
+    std::vector<std::string> following_words(splits.begin() + 1, splits.end());
 
     // check if word actually in valid words
     if (!res.has_value()){
@@ -102,7 +103,7 @@ std::string handle_input(std::string &input)
             return terminate_word;
         break;
     case LOOK:
-        
+        return handle_look(following_words);
         break;
     
     default:

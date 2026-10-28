@@ -64,3 +64,7 @@ std::string Location::get_point_desc(const std::string &word) const
 
     return desc;
 };
+
+void Location::add_point(Point point){
+    points.emplace_back(point);
+}
