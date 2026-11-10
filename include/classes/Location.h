@@ -10,10 +10,16 @@ class Location;
 
 // IDEA: make a location_ref class that has the name of the room the path and then a possibly
 // null pointer to the actual object
-struct Passage
+class Passage
 {
+    // TODO:constructor
+
     std::string port;
     Location *next_loc;
+    bool open;
+
+    public:
+        std::string move_to();
 };
 
 class Location

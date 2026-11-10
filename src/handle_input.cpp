@@ -20,7 +20,8 @@ namespace
         EXIT,
         ATTACK,
         LOOK,
-        USE
+        USE,
+        MOVE
     };
     // Checks first word of input to see if its in total set of valid words
     // if so, maps any synonym to a parent identifier
@@ -30,7 +31,8 @@ namespace
             {EXIT , {"exit", "quit", "terminate"}},
             {ATTACK, {"attack", "fight", "battle", "combat"}},
             {USE, {"use", "utilize", "activate"}}, 
-            {LOOK, {"look", "search"}}
+            {LOOK, {"look", "search"}},
+            {MOVE, {"move", "go", "walk", "relocate"}}
         };
 
     
@@ -105,7 +107,10 @@ std::string handle_input(std::string &input)
     case LOOK:
         return handle_look(following_words);
         break;
-    
+    case MOVE:
+        
+        return handle_move(following_words);
+        break;
     default:
         break;
     }
